@@ -1,0 +1,31 @@
+sudo insmod tc_ingress_clsact_filter.ko
+    lsmod | grep tc_ingress_clsact_filter
+    dmesg | tail
+
+sudo rmmod tc_ingress_clsact_filter
+
+
+(venv) upgautam@deimos:~/Downloads/bpfabsorb/bpf-progs/kernel_module$ sudo insmod tc_ingress_clsact_filter.ko
+(venv) upgautam@deimos:~/Downloads/bpfabsorb/bpf-progs/kernel_module$ lsmod | grep tc_ingress_clsact_filter
+tc_ingress_clsact_filter    12288  0
+(venv) upgautam@deimos:~/Downloads/bpfabsorb/bpf-progs/kernel_module$ sudo rmmod tc_ingress_clsact_filter
+(venv) upgautam@deimos:~/Downloads/bpfabsorb/bpf-progs/kernel_module$ lsmod | grep tc_ingress_clsact_filter
+(venv) upgautam@deimos:~/Downloads/bpfabsorb/bpf-progs/kernel_module$
+
+
+
+# Specify the kernel build directory for the running kernel. Makefile would be so we can load in our host system.
+KDIR ?= /lib/modules/$(shell uname -r)/build
+# Specify the module name
+MODULE_NAME = tc_ingress_clsact_filter
+# Specify the object files
+obj-m += $(MODULE_NAME).o
+# Build target
+all:
+	$(MAKE) -C $(KDIR) M=$(PWD) modules
+# Clean target
+clean:
+	$(MAKE) -C $(KDIR) M=$(PWD) clean
+.PHONY: all clean
+
+
