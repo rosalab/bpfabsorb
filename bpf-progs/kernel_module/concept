@@ -29,3 +29,16 @@ clean:
 .PHONY: all clean
 
 
+
+
+To trigger
+
+tc qdisc add dev eth0 clsact
+tc filter add dev ens4 ingress bpf da obj ./filterIphardcode.kern.o sec tc/ingress
+./filterIps.user 192.168.100.10
+
+cat /sys/kernel/debug/tracing/trace_pipe
+
+
+fping -I eth0 -c 1 8.8.8.8
+fping -I eth0 -c 4 75.75.75.75
