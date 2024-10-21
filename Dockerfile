@@ -76,7 +76,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install --fix-missing -y \
     openssl \
     genisoimage \
     pciutils \
-    clang \
     llvm \
     libvirt-daemon-system \
     libvirt-clients \
